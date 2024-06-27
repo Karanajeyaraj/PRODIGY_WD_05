@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        header{
+            font-family:'Times New Roman', Times, serif;
+            font-size:larger;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        body {
+            background-image: url("https://img.freepik.com/premium-psd/3d-icon-weather-sunny-day_10376-1102.jpg?w=740");
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+         font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            
+        }
+
+        .container {
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 75%;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid blue;
+            border-radius: 25px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            opacity: 100%;
+        }
+
+        button {
+            background-color: lightskyblue;
+            opacity: 100%;
+            color: blue;
+            padding: 10px 20px;
+            border: solid lightskyblue;
+            border-radius: 25px;
+            cursor: pointer;
+            opacity: 100%;
+        }
+
+        .weather-info {
+            margin-top: 20px;
+        }
+
+        .weather-info p {
+            margin: 5px 0;
+        }
+        footer{
+            align-content: center;
+            margin-bottom: 0%;
+            display:inline-flex;
+            width: 100vh;
+            height: 20vh;
+        }
+    </style>
+</head>
+<header>
+    <h1>Karana's Weather App</h1>
+    </header>
+   <body><div class="container">
+        <h1>   Weather Wise</h1>
+        <h4>Weather wisdom at your fingertips!</h4>
+        <input type="text" id="location" placeholder="Enter location">
+        <button onclick="getWeather()">Get Weather</button>
+        <div class="weather-info">
+            <p id="city"></p>
+            <p id="temperature"></p>
+            <p id="description"></p>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = 'cef9351e5e9011c85aea83eec2222977'; 
+
+        function getWeather() {
+            const location = document.getElementById('location').value;
+            const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
+
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('city').textContent = `City: ${data.name}`;
+        document.getElementById('temperature').textContent = `Temperature: ${data.main.temp}°C`;
+        document.getElementById('description').textContent = `Description: ${data.weather[0].description}`;
+    })
+    .catch(error => {
+        console.error('Error fetching weather data:', error);
+    });
+}
+</script>
+</body>
+<footer>
+    API USED : https://openweathermap.org/<br>
+    &copykarana
+</footer>
+</html>
